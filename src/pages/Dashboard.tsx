@@ -1,7 +1,20 @@
 import bg from "../Asset/bg.jpeg";
+import Loading from "../component/LoadingComponent";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 function Dashboard() {
   const storedName = localStorage.getItem("name");
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState<boolean>(false);
+
+  function onClick() {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      navigate("/Clicked");
+    }, 2000);
+  }
 
   return (
     <div
@@ -12,10 +25,19 @@ function Dashboard() {
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
       }}>
-      <div className="text-center">
-        <p className="text-xl flex">Hai, <p className="font-bold ml-2 mr-2">{storedName}</p> biar kamu semangat coba klik tombol dibawah ini</p>
-        <button className="bg-blue-500 text-white p-2 rounded-xl font-bold hover:bg-blue-800 mt-6">Klik ini nih</button>
-      </div>
+      {!loading && (
+        <div className="text-center w-64">
+          <p className="text-xl flex">
+            Hai {storedName}. biar kamu semangat coba klik tombol dibawah ini
+          </p>
+          <button
+            onClick={onClick}
+            className="bg-blue-500 text-white p-2 rounded-xl font-bold hover:bg-blue-800 mt-6">
+            Klik ini nih
+          </button>
+        </div>
+      )}
+      <Loading isLoading={loading} />
     </div>
   );
 }
