@@ -1,5 +1,7 @@
 import ReactPlayer from 'react-player';
 import bg from "../Asset/bg.jpeg";
+import { array } from 'yup';
+// import song from 
 
 
 function Clicked() {
@@ -21,10 +23,7 @@ function Clicked() {
           making it this far 😁
         </p>
       </div>
-      <ReactPlayer url="https://youtu.be/10rqze65KMA?si=WR9zcWP9EELchtzU" playing controls={false} className="hidden" />
-
-
-
+      <ReactPlayer url={["song.mp3"]} playing controls={false}  className="hidden"/>
     </div>
   );
 }
